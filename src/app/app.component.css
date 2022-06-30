@@ -1,0 +1,18 @@
+p {
+  font-family: Lato;
+}
+p {
+  font-family: Lato;
+}
+div {
+  height: 100px;
+  width: 100px;
+  border: solid;
+  cursor: pointer;
+}
+.user1 {
+  background-color: red;
+}
+.user2 {
+  background-color: black;
+}
