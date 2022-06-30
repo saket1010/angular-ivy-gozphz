@@ -6,6 +6,9 @@ import { Component, VERSION } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  user1name: string;
+  user2name: string;
+
   matrixSize: number = 3;
   matrix: number[][] = [
     [2, 3, 4],
@@ -27,7 +30,12 @@ export class AppComponent {
       document.getElementById(id).className = 'user2';
     }
     if (this.checkResult() == true) {
-      alert(this.userid + ' WON');
+      if (this.userid == 0) {
+        alert('BLACK WON');
+      } else {
+        alert('RED WON');
+      }
+      new AppComponent();
     }
   }
   checkResult(): boolean {
@@ -93,28 +101,30 @@ export class AppComponent {
   }
   identicalDiagnol(mat) {
     let i = 0;
-    let j = 0;
-    for (i = 0; i < mat.length; i++) {
-      let temp = mat[i][j];
-      for (j = 0; j < mat[i].length; j++) {
-        if (i != j && mat[i][j] != temp) {
-          return false;
-        }
+    let temp = this.matrix[i][i];
+    while (i != this.matrixSize) {
+      if (this.matrix[i][i] != temp) {
+        break;
       }
+      i++;
+    }
+    let j = this.matrixSize - 1;
+    if (i == this.matrixSize) {
       return true;
     }
-  }
-  isDiagonalMatrix(mat) {
-    for (let i = 0; i < this.matrixSize; i++) {
-      let j;
-      let temp = this.matrix[i][j];
-      for (j = 0; j < this.matrixSize; j++) {
-        if (i != j && mat[i][j] != temp) {
-          return false;
-        }
-        return true;
+    i = 0;
+    temp = this.matrix[i][j];
+    while (i != this.matrixSize) {
+      if (this.matrix[i][j] != temp) {
+        break;
       }
+      j--;
+      i++;
     }
+    if (i == this.matrixSize) {
+      return true;
+    }
+    return false;
   }
 
   insertPoint(id: number, userid: number) {
@@ -134,5 +144,13 @@ export class AppComponent {
         console.log(this.matrix[i][j]);
       }
     }
+  }
+
+  clearMatrix(): void {
+    this.matrix = [
+      [2, 3, 4],
+      [5, 6, 7],
+      [8, 9, 10],
+    ];
   }
 }
